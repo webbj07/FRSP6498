@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FRSP6498.ConfigCreator"
+             Title="ConfigCreator">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Label Text="Config Builder" Style="{StaticResource Headline}" HorizontalOptions="Center" Grid.Column="1" Grid.Row="0"/>
+        <Button Text="Save" HorizontalOptions="End" Grid.Column="1" Clicked="Save_Clicked" HeightRequest="50" Margin="30,0" WidthRequest="80" VerticalOptions="Start"/>
+        <!--List of currently added Controls-->
+        <Label Text="Current Controls" Grid.Column="0" Grid.Row="0" Style ="{StaticResource SubHeadline}" VerticalOptions="End" Margin="10"/>
+        <Border Grid.Row="1" Margin="20,0,20,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="30"/>
+            </Border.StrokeShape>
+            <ScrollView  Grid.Row="1" Padding="20">
+                <StackLayout x:Name="CurrentControlView" Spacing="10"/>
+            </ScrollView>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1">
+            <!--#region Main menu for adding controls-->
+            
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--controls menu-->
+            <Border Grid.ColumnSpan="3">
+                <StackLayout Orientation="Horizontal" Grid.ColumnSpan="3" Grid.Row="0" Spacing="5" HorizontalOptions="Start" Margin="10, 10" x:Name="Test">
+                    <Button Text="CheckBox" ToolTipProperties.Text="CheckBox" Clicked="Control_Add_Clicked"/>
+                    <Button Text="Number Input" ToolTipProperties.Text="Numerical input box" Clicked="Control_Add_Clicked"/>
+                    <Button Text="Simple Text Input" ToolTipProperties.Text="Simple one line text input" Clicked="Control_Add_Clicked"/>
+                    <Button Text="Rich Text Box" ToolTipProperties.Text="Multiline rich text editor" Clicked="Control_Add_Clicked"/>
+                    
+                </StackLayout>
+            </Border>
+                <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ScrollView Grid.Row="0">
+                        <StackLayout Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" x:Name="UiSettings" Spacing="16" Padding="30,10" MinimumHeightRequest="200"/>
+                    </ScrollView>
+                    <Button Text="Submit" Clicked="Submit_Clicked" Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" HeightRequest="50" />
+                </Grid>
+            </Grid>
+        <!--#endregion-->
+        </Border>
+    </Grid>
+</ContentPage>
