@@ -2,8 +2,9 @@ namespace FRSP6498;
 
 public partial class InputPage : ContentPage
 {
-	public InputPage()
-	{
-		InitializeComponent();
-	}
+    List<UISettings> loadedSettings = [];
+    public InputPage(List<UISettings> loadedSettings){
+        this.loadedSettings = loadedSettings;
+        InitializeComponent();
+    }
 }

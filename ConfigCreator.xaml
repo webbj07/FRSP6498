@@ -4,6 +4,7 @@
              x:Class="FRSP6498.ConfigCreator"
              Title="ConfigCreator">
     <Grid>
+        <!--#region Grid row/col defs-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
@@ -12,21 +13,23 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
+        <!--#endregion-->
+
         <Label Text="Config Builder" Style="{StaticResource Headline}" HorizontalOptions="Center" Grid.Column="1" Grid.Row="0"/>
         <Button Text="Save" HorizontalOptions="End" Grid.Column="1" Clicked="Save_Clicked" HeightRequest="50" Margin="30,0" WidthRequest="80" VerticalOptions="Start"/>
-        <!--List of currently added Controls-->
+        <!--Sidebar-->
         <Label Text="Current Controls" Grid.Column="0" Grid.Row="0" Style ="{StaticResource SubHeadline}" VerticalOptions="End" Margin="10"/>
         <Border Grid.Row="1" Margin="20,0,20,10">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="30"/>
             </Border.StrokeShape>
+        <!--List of currently added Controls-->
             <ScrollView  Grid.Row="1" Padding="20">
                 <StackLayout x:Name="CurrentControlView" Spacing="10"/>
             </ScrollView>
         </Border>
         <Border Grid.Row="1" Grid.Column="1">
-            <!--#region Main menu for adding controls-->
-            
+        <!--#region Main menu for adding controls-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
@@ -44,7 +47,7 @@
                     <Button Text="Number Input" ToolTipProperties.Text="Numerical input box" Clicked="Control_Add_Clicked"/>
                     <Button Text="Simple Text Input" ToolTipProperties.Text="Simple one line text input" Clicked="Control_Add_Clicked"/>
                     <Button Text="Rich Text Box" ToolTipProperties.Text="Multiline rich text editor" Clicked="Control_Add_Clicked"/>
-                    
+
                 </StackLayout>
             </Border>
                 <Grid Grid.Row="1" Grid.ColumnSpan="3">
@@ -52,6 +55,7 @@
                         <RowDefinition Height="5*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <!--Where the options for each ui setting are displayed-->
                     <ScrollView Grid.Row="0">
                         <StackLayout Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" x:Name="UiSettings" Spacing="16" Padding="30,10" MinimumHeightRequest="200"/>
                     </ScrollView>

@@ -3,7 +3,7 @@ using System.Diagnostics;
 namespace FRSP6498;
 
 public partial class ConfigCreator : ContentPage
-{ 
+{
     private readonly List<UISettings> settings = [];
     private UISettings currentSettings = new();
     /// <summary>
@@ -83,7 +83,7 @@ public partial class ConfigCreator : ContentPage
         UiSettings.Add(radioButton);
         UiSettings.Add(radioButton2);
         UiSettings.Add(elementPosition);
-        
+
     }
     private void AddPreConfiguredSettings(UISettings preConfigSettings)
     {
@@ -157,8 +157,9 @@ public partial class ConfigCreator : ContentPage
         else
         {
             DisplaySetting(null);
+            settings.Add(currentSettings);
             Debug.WriteLine("Adding");
-        
+
         }
 
         settingCount += 1;
@@ -167,8 +168,9 @@ public partial class ConfigCreator : ContentPage
     }
     private void DisplaySetting(int? index)
     {
+
         var controlType = "";
-        
+
         switch (currentSettings.DataType)
         {
             case "double": controlType = "Number Input"; break;
@@ -205,7 +207,7 @@ public partial class ConfigCreator : ContentPage
         fileName ??= await DisplayPromptAsync("File Name", "Enter a file name (leave empty to cancel)");
 
         if (fileName != null && fileName != string.Empty) {
-            Debug.WriteLine("Attempting to write config");
+            Debug.WriteLine($"Attempting to write config with name {fileName}");
             ConfigUtil.WriteConfig(settings, fileName);
         }
         else

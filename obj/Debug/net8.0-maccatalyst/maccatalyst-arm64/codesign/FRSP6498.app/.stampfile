@@ -1,0 +1,1 @@
+-v --force --timestamp=none --sign - --entitlements /Users/jwebb/Documents/GitHub/FRSP6498/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/Entitlements.xcent /Users/jwebb/Documents/GitHub/FRSP6498/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/FRSP6498.app

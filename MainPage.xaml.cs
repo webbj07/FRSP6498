@@ -23,13 +23,19 @@ public partial class MainPage : ContentPage
     }
     private void RefreshConfigs()
     {
+        //clear old configs from the ui
         configs.Clear();
         configView.Clear();
+        //make sure the config Directory exists
+        ConfigUtil.CheckConfigDirectory();
+
         var fullFiles = Directory.GetFiles(ConfigUtil.CONFIG_DIRECTORY);
-        foreach (var item in fullFiles)
+        //add each filename to the list
+        foreach (var file in fullFiles)
         {
-            configs.Add(System.IO.Path.GetFileName(item));
+            configs.Add(System.IO.Path.GetFileName(file));
         }
+        //create ui elements to display the configs in the list
         foreach (var config in configs)
         {
             var border = new Border() { Stroke = new SolidColorBrush(Colors.Gray), StrokeThickness = 1, StrokeShape = new RoundRectangle() { CornerRadius = 10 } };
@@ -38,7 +44,7 @@ public partial class MainPage : ContentPage
             g.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(1, GridUnitType.Star)));
             g.ColumnDefinitions.Add(new ColumnDefinition(new GridLength (1, GridUnitType.Star)));
             g.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(1, GridUnitType.Star)));
-            
+
             var configName = new Label() { Text = config, VerticalOptions = LayoutOptions.Center, FontSize = 18, Margin = new Thickness(10,0,0,0) };
             var Open = new Button() { Text = "Open", ClassId = config /*bad way to keep track of what file this button is talking about*/, WidthRequest = 80 };
             var Edit = new Button() { Text = "Edit", ClassId = config, WidthRequest = 80};
@@ -53,6 +59,7 @@ public partial class MainPage : ContentPage
             border.Content = g;
             configView.Add(border);
         }
+        #region DEBUG
         if (configs.Count >0)
         {
             Debug.WriteLine("Existing Configs Found");
@@ -61,19 +68,37 @@ public partial class MainPage : ContentPage
         {
             Debug.WriteLine($"No Existing Configs Found at path {ConfigUtil.CONFIG_DIRECTORY}");
         }
+       #endregion
     }
-    private void Config_Clicked(object? sender, EventArgs e)
+    private async void Config_Clicked(object? sender, EventArgs e)
     {
-        //TODO: figure out how to navigate to a new page
         var b = sender as Button;
-        var path = FileSystem.Current.AppDataDirectory + "\\" + b!.Text;
-        Debug.WriteLine(path);
+        //get the config file path
+        var path = ConfigUtil.CONFIG_DIRECTORY+ $"\\{b!.Text}";
+        List<UISettings> readSettings = ConfigUtil.ReadConfig(path);
+        if (readSettings.Count > 0)
+        {
+            await Navigation.PushAsync(new InputPage(null));
+        }
+        else{
+            await DisplayAlert("Warning", "Config has no settings", "Ok");
+        }
+        Debug.WriteLine($"config at {path} has no settings currently");
     }
-
+    /// <summary>
+    /// Navigates to the ConfigCreator page in create mode
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void AddNew_Clicked(object? sender, EventArgs e)
     {
         await Navigation.PushAsync(new ConfigCreator(null, null));
     }
+    /// <summary>
+    /// Navigates to the ConfigCreator page in edit mode
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void EditConfig_Clicked(object? sender, EventArgs e)
     {
         var button = sender as Button;
@@ -89,4 +114,3 @@ public partial class MainPage : ContentPage
         }
     }
 }
-

@@ -23,6 +23,6 @@
                 <StackLayout Orientation="Vertical" x:Name="configView" Spacing="30" Padding="10,10"/>
             </ScrollView>
         </Border>
-            
+
     </Grid>
 </ContentPage>
