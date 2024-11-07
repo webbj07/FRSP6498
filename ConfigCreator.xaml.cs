@@ -5,7 +5,7 @@ namespace FRSP6498;
 public partial class ConfigCreator : ContentPage
 {
     private readonly List<UISettings> settings = [];
-    private UISettings currentSettings = new();
+    private UISettings currentSettings = new() {Name = ""};
     /// <summary>
     /// Used for finding a specific Control in the settings list after it has been added
     /// </summary>
@@ -62,6 +62,7 @@ public partial class ConfigCreator : ContentPage
             var type = currentSettings.DataType;
             currentSettings = new()
             {
+                Name = "",
                 DataType = type
             };
         }
@@ -92,7 +93,7 @@ public partial class ConfigCreator : ContentPage
         {
             UiSettings.Children.Clear();
             var type = currentSettings.DataType;
-            currentSettings = new();
+            currentSettings = new(){Name = ""};
             currentSettings.DataType = type;
         }
         var ControlTypeSelected = new Label() { Text = currentSettings.DataType, FontSize = 24, HorizontalOptions = LayoutOptions.Center };
@@ -163,7 +164,9 @@ public partial class ConfigCreator : ContentPage
         }
 
         settingCount += 1;
-        currentSettings = new();
+        currentSettings = new(){
+            Name = ""
+        };
         UiSettings.Children.Clear();
     }
     private void DisplaySetting(int? index)

@@ -4,7 +4,13 @@
 /// </summary>
 public class UISettings
 {
-    public string? Name { get; set; }
+    /// <summary>
+    /// Every Setting needs to have a name
+    /// </summary>
+    public required string Name { get; set; }
+    /// <summary>
+    /// Leave as null if the control is ui only (does not accept input)
+    /// </summary>
     public string? DataType { get; set; }
     public string? Position { get; set; }
     public string? Value { get; set; }

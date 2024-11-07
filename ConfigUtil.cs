@@ -36,30 +36,19 @@ internal static class ConfigUtil
         }
         return config;
     }
-    internal static List<IView> GenerateControlsFromConfig(List<UISettings> controls){
-        List<IView> controlsList = [];
-        foreach (var control in controls){
-            switch (control.DataType)
-            {
-                case "bool":
-                CheckBox c = new CheckBox();
-
-                controlsList.Add(new CheckBox());
-                break;
-                case "double":
-                controlsList.Add(new Entry(){Placeholder = control.Name});
-                break;
-                case "rtf":
-                controlsList.Add(new Editor(){Placeholder = control.Name});
-                break;
-                case "string":
-                controlsList.Add(new Entry(){Placeholder = control.Name});
-                break;
-                default:
-                break;
-            }
+    public static long ConvertConfigToID(string fileName){
+        CheckConfigDirectory();
+        if (!File.Exists(CONFIG_DIRECTORY+fileName))
+        {
+            return 0;
         }
-        return controlsList;
+        var json = File.ReadAllText(CONFIG_DIRECTORY + fileName);
+        long charSum=0;
+        for (int i = 0; i < json.Length; i++)
+        {
+            charSum+=json[i];
+        }
+        return charSum;
     }
     internal static void CheckConfigDirectory()
     {
