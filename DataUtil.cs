@@ -38,6 +38,14 @@ public static class DataUtil
 
         File.WriteAllText(DATA_PATH + fileName, header.ToString());
     }
+    public static Dictionary<string, List<string>> ConvertSettingsToDataDict(List<UISettings> settings){
+        Dictionary<string,List<string>> data = [];
+        foreach (var item in settings)
+        {
+            data.Add(item.Name, []);
+        }
+        return data;
+    }
     public static void ValidateDataPath() {
          if(!Directory.Exists(DATA_PATH))
             Directory.CreateDirectory(DATA_PATH);

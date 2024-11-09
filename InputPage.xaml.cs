@@ -1,17 +1,18 @@
-using AVFoundation;
 
 namespace FRSP6498;
 
 public partial class InputPage : ContentPage
 {
+    string rootConfigFileName = string.Empty;
     readonly List<UISettings> loadedSettings = [];
     readonly Dictionary<string, List<string>> submissions = [];
     /// <summary>
     /// Where in the submissions dictionary to add data
     /// </summary>
     int submissionIndex = 0;
-    public InputPage(List<UISettings> loadedSettings){
+    public InputPage(List<UISettings> loadedSettings, string? rootConfigFileName){
         this.loadedSettings = loadedSettings;
+        this.rootConfigFileName ??= rootConfigFileName;
         //add input names to the dictionary to save data
         //(values are of type List<string> to allow for multiple inputs without recreating the dictionary)
         foreach (var control in loadedSettings)
@@ -98,6 +99,16 @@ public partial class InputPage : ContentPage
         submissionIndex += 1;
     }
     public void HandleSave(object? sender, EventArgs e){
-
+        string fileName = ConfigUtil.ConvertConfigToID(rootConfigFileName).ToString();
+        string csvData = "";
+        for (int i = 0; i < submissions.Values.First().Count; i++)
+        {
+            foreach (var item in submissions)
+            {
+                csvData += item.Value[i];
+            }
+            csvData +='\n';
+        }
+        File.WriteAllText(fileName, csvData);
     }
 }

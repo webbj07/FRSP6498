@@ -72,18 +72,20 @@ public partial class MainPage : ContentPage
     }
     private async void Config_Clicked(object? sender, EventArgs e)
     {
+        Debug.WriteLine("Opening config");
         var b = sender as Button;
         //get the config file path
-        var path = ConfigUtil.CONFIG_DIRECTORY+ $"\\{b!.Text}";
-        List<UISettings> readSettings = ConfigUtil.ReadConfig(path);
-        if (readSettings.Count > 0)
+        List<UISettings> readSettings = ConfigUtil.ReadConfig(b!.ClassId)!;
+        Debug.WriteLine("Checking settings");
+        if (readSettings != null || readSettings.Count > 0)
         {
-            await Navigation.PushAsync(new InputPage(null));
-        }
-        else{
+            Debug.WriteLine("Pushing Input page");
+            await Navigation.PushAsync(new InputPage(readSettings, null));
+        }else{
+            Debug.WriteLine("Displaying warning");
             await DisplayAlert("Warning", "Config has no settings", "Ok");
+            await Navigation.PushAsync(new InputPage([], null));
         }
-        Debug.WriteLine($"config at {path} has no settings currently");
     }
     /// <summary>
     /// Navigates to the ConfigCreator page in create mode
@@ -102,7 +104,7 @@ public partial class MainPage : ContentPage
     private async void EditConfig_Clicked(object? sender, EventArgs e)
     {
         var button = sender as Button;
-        await Navigation.PushAsync(new ConfigCreator(ConfigUtil.ReadConfig(button!.ClassId), button!.ClassId[..button!.ClassId.IndexOf('.')]));
+        await Navigation.PushAsync(new ConfigCreator(ConfigUtil.ReadConfig(button!.ClassId), button!.ClassId[..button!.ClassId.IndexOf('.')/*rips the file ending from the file name*/]));
     }
     private void DeleteConfig_Clicked(object? sender, EventArgs e)
     {

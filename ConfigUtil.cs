@@ -6,17 +6,20 @@ namespace FRSP6498;
 internal static class ConfigUtil
 {
     public static readonly string CONFIG_DIRECTORY = FileSystem.Current.AppDataDirectory + "/configs/";
-    public static void WriteConfig(List<UISettings> settings, string fileName)
+    public static string WriteConfig(List<UISettings> settings, string fileName)
     {
         CheckConfigDirectory();
         Debug.WriteLine($"{settings.Count} items found -- Writing");
         var path = CONFIG_DIRECTORY + $"{fileName}.json";
+        string fulljson ="";
         foreach (var item in settings)
         {
             var json = JsonSerializer.Serialize(item);
             Debug.WriteLine($"{json} written to {path}");
-            File.WriteAllText(path, json);
+            fulljson+=json;
         }
+        File.WriteAllText(path, fulljson);
+        return fulljson;
     }
     internal static List<UISettings>? ReadConfig(string fileName)
     {
@@ -36,6 +39,11 @@ internal static class ConfigUtil
         }
         return config;
     }
+    /// <summary>
+    /// Sums the value of all the characters in a string
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
     public static long ConvertConfigToID(string fileName){
         CheckConfigDirectory();
         if (!File.Exists(CONFIG_DIRECTORY+fileName))
@@ -43,12 +51,15 @@ internal static class ConfigUtil
             return 0;
         }
         var json = File.ReadAllText(CONFIG_DIRECTORY + fileName);
-        long charSum=0;
-        for (int i = 0; i < json.Length; i++)
+        return StringToID(json);
+    }
+    public static long StringToID(string str){
+        long sum = 0;
+        for (int i = 0; i < str.Length; i++)
         {
-            charSum+=json[i];
+            sum+=str[i];
         }
-        return charSum;
+        return sum;
     }
     internal static void CheckConfigDirectory()
     {

@@ -5,7 +5,7 @@ namespace FRSP6498;
 public partial class ConfigCreator : ContentPage
 {
     private readonly List<UISettings> settings = [];
-    private UISettings currentSettings = new() {Name = ""};
+    private UISettings currentSettings = new() { Name = "" };
     /// <summary>
     /// Used for finding a specific Control in the settings list after it has been added
     /// </summary>
@@ -31,7 +31,7 @@ public partial class ConfigCreator : ContentPage
 	}
     public void Control_Add_Clicked(object sender, EventArgs e)
     {
-        var b = sender as Microsoft.Maui.Controls.Button;
+        var b = sender as Button;
         switch (b!.Text)
         {
             case "CheckBox":
@@ -70,20 +70,20 @@ public partial class ConfigCreator : ContentPage
         var nameInfor = new Label() { Text = "Note--The name of the control is also the text that is displayed on the control when loaded into the ui" };
         var nameEntry = new Entry() { Placeholder = "Control Name" };
         nameEntry.TextChanged += OtherUiInformationChanged;
-        var elementPosition = new RadioButton() { Content = "start" };
-        elementPosition.CheckedChanged += ElementPositionTextChanged;
-        var radioButton = new RadioButton() { Content = "center" };
-        radioButton.CheckedChanged += ElementPositionTextChanged;
-        var radioButton2 = new RadioButton() { Content = "end"};
-        radioButton2.CheckedChanged += ElementPositionTextChanged;
+        var elementPositionStart = new RadioButton() { Content = "start" };
+        elementPositionStart.CheckedChanged += ElementPositionTextChanged;
+        var elementPositionCenter = new RadioButton() { Content = "center" };
+        elementPositionCenter.CheckedChanged += ElementPositionTextChanged;
+        var elementPositionEnd = new RadioButton() { Content = "end"};
+        elementPositionEnd.CheckedChanged += ElementPositionTextChanged;
 
         UiSettings.Add(ControlTypeSelected);
         UiSettings.Add(nameInfor);
         UiSettings.Add(nameEntry);
         UiSettings.Add(new Label() { Text = "Position of the element in the ui:" });
-        UiSettings.Add(radioButton);
-        UiSettings.Add(radioButton2);
-        UiSettings.Add(elementPosition);
+        UiSettings.Add(elementPositionCenter);
+        UiSettings.Add(elementPositionEnd);
+        UiSettings.Add(elementPositionStart);
 
     }
     private void AddPreConfiguredSettings(UISettings preConfigSettings)
@@ -211,7 +211,10 @@ public partial class ConfigCreator : ContentPage
 
         if (fileName != null && fileName != string.Empty) {
             Debug.WriteLine($"Attempting to write config with name {fileName}");
-            ConfigUtil.WriteConfig(settings, fileName);
+            string json = ConfigUtil.WriteConfig(settings, fileName);
+            Dictionary<string, List<string>> data = DataUtil.ConvertSettingsToDataDict(settings);
+            long dataFileName = ConfigUtil.StringToID(json);
+            DataUtil.WriteCsvHeader(dataFileName.ToString(), data);
         }
         else
         {
