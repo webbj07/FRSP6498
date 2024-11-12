@@ -13,10 +13,15 @@ public class InputUtil
         StackLayout stack = new()
         {
             Orientation = orientation,
+            HorizontalOptions = LayoutOptions.Fill,
+            VerticalOptions = LayoutOptions.Fill,
+            Spacing = 5
         };
         Label controlLabel = new() 
         { 
-            Text = label
+            Text = label,
+            HorizontalOptions = LayoutOptions.Start,
+            VerticalOptions = LayoutOptions.Center
         };
         stack.Add(controlLabel);
         stack.Add(toWrap);

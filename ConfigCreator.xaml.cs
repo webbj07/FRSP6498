@@ -211,9 +211,9 @@ public partial class ConfigCreator : ContentPage
 
         if (fileName != null && fileName != string.Empty) {
             Debug.WriteLine($"Attempting to write config with name {fileName}");
-            string json = ConfigUtil.WriteConfig(settings, fileName);
+            var json = ConfigUtil.WriteConfig(settings, fileName);
             Dictionary<string, List<string>> data = DataUtil.ConvertSettingsToDataDict(settings);
-            long dataFileName = ConfigUtil.StringToID(json);
+            var dataFileName = ConfigUtil.StringToID(json);
             DataUtil.WriteCsvHeader(dataFileName.ToString(), data);
         }
         else

@@ -4,18 +4,25 @@
              x:Class="FRSP6498.InputPage"
              Title="InputPage">
 
-             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <!--Default Controls-->
-                <StackLayout Orientation="Horizontal" Grid.Row="0">
-                    <Label Text="Match #:" />
-                    <Entry Placeholder="Match #" ClassId="MatchNum"/>
-                    <Label Text="Team #:"/>
-                    <Entry Placeholder="Team #" ClassId="TeamNum"/>
-                </StackLayout>
-                <Grid Grid.Row="1" x:Name="CustomGrid"/>
-             </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--Default Controls-->
+        <StackLayout Orientation="Horizontal" Grid.Row="0" Spacing="30" HorizontalOptions="Fill" Padding="20,0,20,0">
+            <Label Text="Match #:" VerticalOptions="Center"/>
+            <Entry Placeholder="Match #" ClassId="MatchNum" HeightRequest="50" TextChanged="HandleNumberInputChanged"/>
+            <Label Text="Team #:" VerticalOptions="Center"/>
+            <Entry Placeholder="Team #" ClassId="TeamNum" HeightRequest="50" TextChanged="HandleNumberInputChanged"/>
+            <Button Text="Submit" Clicked="HandleSubmission" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+        </StackLayout>
+        <Grid Grid.Row="1" x:Name="CustomGrid" VerticalOptions="Fill" Padding="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </Grid>
 </ContentPage>

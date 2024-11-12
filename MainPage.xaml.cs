@@ -10,6 +10,10 @@ public partial class MainPage : ContentPage
 
     public MainPage()
     {
+        if (File.Exists(ConfigUtil.LAST_CONFIG_PATH))
+        {
+            Config_Clicked(new Button() { ClassId = File.ReadAllText(ConfigUtil.LAST_CONFIG_PATH) }, null);
+        }
         InitializeComponent();
         RefreshConfigs();
         NavigatedTo += MainPage_NavigatedTo;
@@ -101,7 +105,7 @@ public partial class MainPage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private async void EditConfig_Clicked(object? sender, EventArgs e)
+    private async void EditConfig_Clicked(object? sender, EventArgs? e)
     {
         var button = sender as Button;
         await Navigation.PushAsync(new ConfigCreator(ConfigUtil.ReadConfig(button!.ClassId), button!.ClassId[..button!.ClassId.IndexOf('.')/*rips the file ending from the file name*/]));

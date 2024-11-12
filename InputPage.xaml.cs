@@ -1,18 +1,21 @@
 
+using System.Diagnostics;
+
 namespace FRSP6498;
 
 public partial class InputPage : ContentPage
 {
-    string rootConfigFileName = string.Empty;
     readonly List<UISettings> loadedSettings = [];
     readonly Dictionary<string, List<string>> submissions = [];
+    long currentID = 0;
     /// <summary>
     /// Where in the submissions dictionary to add data
     /// </summary>
     int submissionIndex = 0;
-    public InputPage(List<UISettings> loadedSettings, string? rootConfigFileName){
+    public InputPage(List<UISettings> loadedSettings, string rootConfigFileName){
         this.loadedSettings = loadedSettings;
-        this.rootConfigFileName ??= rootConfigFileName;
+        currentID = ConfigUtil.ConvertConfigToID(rootConfigFileName);
+        ConfigUtil.SaveConfigToMemory(rootConfigFileName);
         //add input names to the dictionary to save data
         //(values are of type List<string> to allow for multiple inputs without recreating the dictionary)
         foreach (var control in loadedSettings)
@@ -23,32 +26,48 @@ public partial class InputPage : ContentPage
             }
         }
         InitializeComponent();
+        CreateControls();
     }
     public void CreateControls(){
+        CustomGrid.RowDefinitions.Clear();
+        for (var i = 0; i <(int)Math.Ceiling((double)loadedSettings.Count / 3); i++)
+        {
+            CustomGrid.RowDefinitions.Add(new RowDefinition(new GridLength(1, GridUnitType.Star)));
+        }
+        int[] rowPositions = [0, 0, 0];
+        var currentPosition = 0;
         foreach (var control in loadedSettings)
         {
             switch (control.DataType)
             {
                 case"double":
-                    var NumberBox = new Entry() {Placeholder = control.Name, ClassId = control.Name};
+                    var NumberBox = new Entry() {Placeholder = control.Name, ClassId = control.Name, HeightRequest = 50, HorizontalOptions=LayoutOptions.End};
                     NumberBox.TextChanged += HandleNumberInputChanged;
-                    CustomGrid.Add(InputUtil.WrapWithLabel(NumberBox,StackOrientation.Horizontal, control.Name));
+                    currentPosition = ConfigUtil.PositionToGridCol(control.Position!);
+                    CustomGrid.Add(InputUtil.WrapWithLabel(NumberBox,StackOrientation.Horizontal, control.Name),currentPosition, rowPositions[currentPosition]);
+                    rowPositions[currentPosition] += 1;
                     break;
                 //TODO: Make a control to handle number input
                 case "string":
-                    var Entry = new Entry() {Placeholder = control.Name, ClassId = control.Name};
-                    Entry.TextChanged += HandleStringInputChanged;
-                    CustomGrid.Add(InputUtil.WrapWithLabel(Entry, StackOrientation.Horizontal, control.Name));
+                    var entry = new Entry() {Placeholder = control.Name, ClassId = control.Name, HeightRequest = 50, HorizontalOptions=LayoutOptions.End};
+                    entry.TextChanged += HandleStringInputChanged;
+                    currentPosition = ConfigUtil.PositionToGridCol(control.Position!);
+                    CustomGrid.Add(InputUtil.WrapWithLabel(entry, StackOrientation.Horizontal, control.Name),currentPosition, rowPositions[currentPosition]);
+                    rowPositions[currentPosition] += 1;
                 break;
                 case"rtf":
-                    var editor = new Editor() {ClassId = control.Name};
+                    var editor = new Editor() {ClassId = control.Name, AutoSize = EditorAutoSizeOption.TextChanges, MaximumHeightRequest = 200};
                     editor.TextChanged += HandleStringInputChanged;
-                    CustomGrid.Add(InputUtil.WrapWithLabel(editor, StackOrientation.Vertical, control.Name));
+                    currentPosition = ConfigUtil.PositionToGridCol(control.Position!);
+                    CustomGrid.Add(InputUtil.WrapWithLabel(editor, StackOrientation.Vertical, control.Name),currentPosition, rowPositions[currentPosition]);
+                    rowPositions[currentPosition] += 1;
                     break;
                 case"bool":
-                    var checkBox = new CheckBox() {ClassId = control.Name};
+                    var checkBox = new CheckBox() {ClassId = control.Name, HorizontalOptions = LayoutOptions.End};
                     checkBox.CheckedChanged += HandleBoolInputChanged;
-                    CustomGrid.Add(InputUtil.WrapWithLabel(checkBox, StackOrientation.Horizontal, control.Name));
+                    currentPosition = ConfigUtil.PositionToGridCol(control.Position!);
+                    CustomGrid.Add(InputUtil.WrapWithLabel(checkBox, StackOrientation.Horizontal, control.Name),currentPosition, rowPositions[currentPosition]);
+                    rowPositions[currentPosition] += 1;
                     break;
                 default: break;
             }
@@ -76,19 +95,19 @@ public partial class InputPage : ContentPage
         if (sender!.GetType() == typeof(Entry))
         {
            var obj = sender as Entry;
-           string text = obj!.Text;
+           var text = obj!.Text;
            try
            {
-                double value = double.Parse(text);
+                var value = double.Parse(text);
                 //if it hasn't thrown exception by now the input is good
                 submissions[obj!.ClassId].Insert(submissionIndex, $"{value}");
            }
            catch (Exception)
            {
             //latest input is not good so remove it from the control
-                obj.Text = text.Substring(text.Length-2, text.Length -1);
-                sender = obj;
-           }
+                
+                obj.Text = obj.Text.Length > 0 ? obj.Text.Remove(obj.Text.Length-1) : obj.Text;
+            }
         }
     }
     public void HandleSubmission(object? sender, EventArgs e){
@@ -99,9 +118,8 @@ public partial class InputPage : ContentPage
         submissionIndex += 1;
     }
     public void HandleSave(object? sender, EventArgs e){
-        string fileName = ConfigUtil.ConvertConfigToID(rootConfigFileName).ToString();
-        string csvData = "";
-        for (int i = 0; i < submissions.Values.First().Count; i++)
+        var csvData = "";
+        for (var i = 0; i < submissions.Values.First().Count; i++)
         {
             foreach (var item in submissions)
             {
@@ -109,6 +127,6 @@ public partial class InputPage : ContentPage
             }
             csvData +='\n';
         }
-        File.WriteAllText(fileName, csvData);
+        File.WriteAllText(currentID.ToString(), csvData);
     }
 }

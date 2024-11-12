@@ -6,6 +6,7 @@ namespace FRSP6498;
 internal static class ConfigUtil
 {
     public static readonly string CONFIG_DIRECTORY = FileSystem.Current.AppDataDirectory + "/configs/";
+    public static readonly string LAST_CONFIG_PATH = FileSystem.Current.AppDataDirectory + "/lastconfig.txt";
     public static string WriteConfig(List<UISettings> settings, string fileName)
     {
         CheckConfigDirectory();
@@ -66,6 +67,31 @@ internal static class ConfigUtil
         if(!Directory.Exists(CONFIG_DIRECTORY))
         {
             Directory.CreateDirectory(CONFIG_DIRECTORY);
+        }
+    }
+    public static int PositionToGridCol(string position)
+    {
+        return position switch
+        {
+            "start" => 0,
+            "center" => 1,
+            "end" => 2,
+            _ => 0,
+        };
+    }
+    public static void SaveConfigToMemory(string configName)
+    {
+        File.WriteAllText(LAST_CONFIG_PATH, configName);
+    }
+    public static string? GetLastConfigFromMemory(string configName)
+    {
+        if (!File.Exists(LAST_CONFIG_PATH))
+        {
+            return null;
+        }
+        else
+        {
+            return File.ReadAllText(LAST_CONFIG_PATH);
         }
     }
 }

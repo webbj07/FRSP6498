@@ -47,7 +47,9 @@ public static class DataUtil
         return data;
     }
     public static void ValidateDataPath() {
-         if(!Directory.Exists(DATA_PATH))
+        if (!Directory.Exists(DATA_PATH))
+        {
             Directory.CreateDirectory(DATA_PATH);
+        }
     }
 }
