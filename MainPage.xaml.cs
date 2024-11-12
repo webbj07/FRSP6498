@@ -84,7 +84,7 @@ public partial class MainPage : ContentPage
         if (readSettings != null || readSettings.Count > 0)
         {
             Debug.WriteLine("Pushing Input page");
-            await Navigation.PushAsync(new InputPage(readSettings, null));
+            await Navigation.PushAsync(new InputPage(readSettings, b!.ClassId));
         }else{
             Debug.WriteLine("Displaying warning");
             await DisplayAlert("Warning", "Config has no settings", "Ok");

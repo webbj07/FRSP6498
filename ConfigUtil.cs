@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 using System.Text.Json;
 
 namespace FRSP6498;
@@ -12,7 +11,7 @@ internal static class ConfigUtil
         CheckConfigDirectory();
         Debug.WriteLine($"{settings.Count} items found -- Writing");
         var path = CONFIG_DIRECTORY + $"{fileName}.json";
-        string fulljson ="";
+        var fulljson = "";
         foreach (var item in settings)
         {
             var json = JsonSerializer.Serialize(item);
@@ -25,7 +24,15 @@ internal static class ConfigUtil
     internal static List<UISettings>? ReadConfig(string fileName)
     {
         CheckConfigDirectory();
-        var json = File.ReadAllText(CONFIG_DIRECTORY+fileName);
+        string json;
+        try
+        {
+            Debug.WriteLine($"Attempting read from {CONFIG_DIRECTORY + fileName}");
+            json = File.ReadAllText(CONFIG_DIRECTORY + fileName);
+        }catch (Exception)
+        {
+            return [];
+        }
         var controls = json.Split("}", StringSplitOptions.RemoveEmptyEntries);
         List<UISettings> config = [];
         Debug.WriteLine($"Controls found in config {fileName}");
@@ -56,7 +63,7 @@ internal static class ConfigUtil
     }
     public static long StringToID(string str){
         long sum = 0;
-        for (int i = 0; i < str.Length; i++)
+        for (var i = 0; i < str.Length; i++)
         {
             sum+=str[i];
         }
@@ -81,12 +88,14 @@ internal static class ConfigUtil
     }
     public static void SaveConfigToMemory(string configName)
     {
+        Debug.WriteLine($"Saving config file {configName} to program memory");
         File.WriteAllText(LAST_CONFIG_PATH, configName);
     }
-    public static string? GetLastConfigFromMemory(string configName)
+    public static string? GetLastConfigFromMemory()
     {
         if (!File.Exists(LAST_CONFIG_PATH))
         {
+            File.Create(LAST_CONFIG_PATH);
             return null;
         }
         else

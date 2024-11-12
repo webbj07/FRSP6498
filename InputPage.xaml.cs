@@ -117,7 +117,7 @@ public partial class InputPage : ContentPage
         //increment dictionary index to add data to
         submissionIndex += 1;
     }
-    public void HandleSave(object? sender, EventArgs e){
+    public async void HandleSave(object? sender, EventArgs e){
         var csvData = "";
         for (var i = 0; i < submissions.Values.First().Count; i++)
         {
@@ -127,6 +127,7 @@ public partial class InputPage : ContentPage
             }
             csvData +='\n';
         }
-        File.WriteAllText(currentID.ToString(), csvData);
+        File.WriteAllText(DataUtil.DATA_PATH + currentID.ToString(), csvData);
+        await DisplayAlert("Alert", "Saved", "Ok");
     }
 }

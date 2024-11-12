@@ -29,7 +29,7 @@
     <AppXManifest Include="C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-11-09T04:52:30.469</Modified>
+      <Modified>2024-11-12T22:24:21.154</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -43,11 +43,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\FRSP6498.dll">
       <PackagePath>FRSP6498.dll</PackagePath>
-      <Modified>2024-11-09T04:52:30.095</Modified>
+      <Modified>2024-11-12T22:24:20.786</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>FRSP6498.exe</PackagePath>
-      <Modified>2024-11-09T04:52:30.099</Modified>
+      <Modified>2024-11-12T22:24:20.791</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
