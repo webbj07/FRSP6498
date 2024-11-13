@@ -212,7 +212,7 @@ public partial class ConfigCreator : ContentPage
         if (fileName != null && fileName != string.Empty) {
             Debug.WriteLine($"Attempting to write config with name {fileName}");
             var json = ConfigUtil.WriteConfig(settings, fileName);
-            Dictionary<string, List<string>> data = DataUtil.ConvertSettingsToDataDict(settings);
+            Dictionary<string, string> data = DataUtil.ConvertSettingsToDataDict(settings);
             var dataFileName = ConfigUtil.StringToID(json);
             DataUtil.WriteCsvHeader(dataFileName.ToString(), data);
         }

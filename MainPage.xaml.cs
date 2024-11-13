@@ -79,7 +79,7 @@ public partial class MainPage : ContentPage
         Debug.WriteLine("Opening config");
         var b = sender as Button;
         //get the config file path
-        List<UISettings> readSettings = ConfigUtil.ReadConfig(b!.ClassId)!;
+        var readSettings = ConfigUtil.ReadConfig(b!.ClassId)!;
         Debug.WriteLine("Checking settings");
         if (readSettings != null || readSettings.Count > 0)
         {

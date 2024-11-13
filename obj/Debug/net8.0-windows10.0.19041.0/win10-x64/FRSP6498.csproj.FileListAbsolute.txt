@@ -178,3 +178,6 @@ C:\Users\webbj\source\repos\FRSP6498\obj\Debug\net8.0-windows10.0.19041.0\win10-
 C:\Users\webbj\source\repos\FRSP6498\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
 C:\Users\webbj\source\repos\FRSP6498\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\ProjectArchitectures.txt
 C:\Users\webbj\source\repos\FRSP6498\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\FRSP6498.sourcelink.json
+C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CommunityToolkit.Maui.dll
+C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CommunityToolkit.Maui.Core.dll
+C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\System.Speech.dll

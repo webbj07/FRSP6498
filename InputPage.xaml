@@ -13,10 +13,10 @@
         <!--Default Controls-->
         <StackLayout Orientation="Horizontal" Grid.Row="0" Spacing="30" HorizontalOptions="Fill" Padding="20,0,20,0">
             <Label Text="Match #:" VerticalOptions="Center"/>
-            <Entry Placeholder="Match #" ClassId="MatchNum" HeightRequest="50" TextChanged="HandleNumberInputChanged"/>
+            <Entry x:Name="MatchNum" Placeholder="Match #" ClassId="MatchNum" HeightRequest="50" TextChanged="HandleNumberInputChanged"/>
             <Label Text="Team #:" VerticalOptions="Center"/>
-            <Entry Placeholder="Team #" ClassId="TeamNum" HeightRequest="50" TextChanged="HandleNumberInputChanged"/>
-            <Button Text="Save" Clicked="HandleSave" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
+            <Entry x:Name="TeamNum" Placeholder="Team #" ClassId="TeamNum" HeightRequest="50" TextChanged="HandleNumberInputChanged"/>
+            <Button Text="Export" Clicked="HandleExport" HorizontalOptions="EndAndExpand" HeightRequest="30"/>
         </StackLayout>
         <Grid Grid.Row="1" x:Name="CustomGrid" VerticalOptions="Fill" Padding="20">
             <Grid.ColumnDefinitions>

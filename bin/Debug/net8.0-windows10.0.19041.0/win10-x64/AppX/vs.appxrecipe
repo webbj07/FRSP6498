@@ -29,25 +29,25 @@
     <AppXManifest Include="C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-11-12T22:24:21.154</Modified>
+      <Modified>2024-11-13T02:43:40.383</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-11-09T03:18:39.535</Modified>
+      <Modified>2024-11-13T00:05:03.184</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\FRSP6498.runtimeconfig.json">
       <PackagePath>FRSP6498.runtimeconfig.json</PackagePath>
-      <Modified>2024-11-09T03:18:39.305</Modified>
+      <Modified>2024-11-13T00:05:02.964</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\FRSP6498.dll">
       <PackagePath>FRSP6498.dll</PackagePath>
-      <Modified>2024-11-12T22:24:20.786</Modified>
+      <Modified>2024-11-13T02:43:39.981</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>FRSP6498.exe</PackagePath>
-      <Modified>2024-11-12T22:24:20.791</Modified>
+      <Modified>2024-11-13T02:43:39.989</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -287,7 +287,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\source\repos\FRSP6498\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\FRSP6498.deps.json">
       <PackagePath>FRSP6498.deps.json</PackagePath>
-      <Modified>2024-11-09T03:18:39.159</Modified>
+      <Modified>2024-11-13T00:05:02.811</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.44\lib\net8.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>
@@ -296,6 +296,14 @@
     <AppxPackagedFile Include="C:\Users\webbj\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.44\lib\net8.0\WinRT.Runtime.dll">
       <PackagePath>WinRT.Runtime.dll</PackagePath>
       <Modified>2024-09-09T00:48:40.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\webbj\.nuget\packages\communitytoolkit.maui\9.1.1\lib\net8.0-windows10.0.19041\CommunityToolkit.Maui.dll">
+      <PackagePath>CommunityToolkit.Maui.dll</PackagePath>
+      <Modified>2024-11-08T09:03:52.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\webbj\.nuget\packages\communitytoolkit.maui.core\9.1.1\lib\net8.0-windows10.0.19041\CommunityToolkit.Maui.Core.dll">
+      <PackagePath>CommunityToolkit.Maui.Core.dll</PackagePath>
+      <Modified>2024-11-08T09:03:54.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\.nuget\packages\microsoft.extensions.configuration\8.0.0\lib\net8.0\Microsoft.Extensions.Configuration.dll">
       <PackagePath>Microsoft.Extensions.Configuration.dll</PackagePath>
@@ -428,6 +436,10 @@
     <AppxPackagedFile Include="C:\Users\webbj\.nuget\packages\microsoft.windowsappsdk\1.5.240627000\lib\net6.0-windows10.0.18362.0\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll">
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.Net.dll</PackagePath>
       <Modified>2024-06-26T19:15:16.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\webbj\.nuget\packages\system.speech\8.0.0\runtimes\win\lib\net8.0\System.Speech.dll">
+      <PackagePath>System.Speech.dll</PackagePath>
+      <Modified>2023-10-31T15:00:06.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\webbj\.nuget\packages\microsoft.maui.controls.core\8.0.82\lib\net8.0-windows10.0.19041\ar\Microsoft.Maui.Controls.resources.dll">
       <PackagePath>ar\Microsoft.Maui.Controls.resources.dll</PackagePath>
